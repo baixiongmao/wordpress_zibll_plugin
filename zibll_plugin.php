@@ -5,7 +5,7 @@
 Plugin Name: zibll插件
 Plugin URI: https://www.bxmao.net
 Description: 白熊猫zibll插件
-Version: 1.3.0
+Version: 1.4.0
 Requires PHP: 7.0
 Author: 白熊猫
 Author URI: https://www.bxmao.net

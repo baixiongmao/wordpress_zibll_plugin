@@ -9,15 +9,16 @@ $.fn.barrage=function(opt){
     }
     var settings = $.extend({},opts,opt);
     var M = {},Obj = {};
-    Obj.data = settings.data;
-    M.bgColors = ['#00000059'];
+    Obj.data = settings.data['danmus'];
+    M.bgColors = settings.data['color'];
     Obj.arrEle = [];
     M.barrageBox = $('<div id="zipllplugin-danmu"></div>'); 
     M.timer = null;
     var createView = function(){
         var randomIndex = Math.floor(Math.random() * M.bgColors.length);
-        var ele = $('<li class="'+Obj.data[0].type+'" style="opacity:0;background-color:'+M.bgColors[randomIndex]+'"><a href="'+Obj.data[0].now_user_link+'" class="img" target="_blank">'+Obj.data[0].avatar+'</a>'+Obj.data[0].content+'</li>');
-        var ele = $('<li class="'+Obj.data[0].type+'" style="opacity:0;background-color:'+M.bgColors[randomIndex]+'"><a href="'+Obj.data[0].now_user_link+'" class="img" target="_blank">'+Obj.data[0].avatar+'</a>'+Obj.data[0].content+'</li>');
+        console.log(randomIndex);
+        var ele = $('<li class="'+Obj.data[0].type+'" style="opacity:0;background-color:'+M.bgColors+'"><a href="'+Obj.data[0].now_user_link+'" class="img" target="_blank">'+Obj.data[0].avatar+'</a>'+Obj.data[0].content+'</li>');
+        var ele = $('<li class="'+Obj.data[0].type+'" style="opacity:0;background-color:'+M.bgColors+'"><a href="'+Obj.data[0].now_user_link+'" class="img" target="_blank">'+Obj.data[0].avatar+'</a>'+Obj.data[0].content+'</li>');
         var str = Obj.data.shift();
         ele.animate({
             'opacity' : 1,
@@ -66,24 +67,3 @@ $.fn.barrage=function(opt){
     }
     return Obj;
 }
-
-
-$.ajax({
-    type: "post",
-    url: '/wp-admin/admin-ajax.php',
-    data: {action:'ziblls_plugin_danmu'},
-    success: function (msg) {
-        var Obj = $('body').barrage({
-            data: msg,//数据
-            row: 3,//显示行数
-            time: 2500,//时间
-            gap: 15,//间隙
-            ismoseoverclose: true, //悬浮是否停止
-        })
-
-        if ($('#zipllplugin-danmu').length == 0) {
-            Obj.start();
-        }
-
-    }
-});
